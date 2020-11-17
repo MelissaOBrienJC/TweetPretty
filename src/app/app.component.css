@@ -1,0 +1,16 @@
+body {
+  overflow-x: hidden !important;
+}
+.container {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+.tweet-pretty-nav-logo-text {
+  color: black;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+.tweet-pretty-nav-link-text {
+  color: black;
+  font-family: "Roboto", sans-serif;
+}

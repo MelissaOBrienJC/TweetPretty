@@ -1,0 +1,199 @@
+<div class="container pt-0 pb-3">
+  <div class="row">
+    <div class="mx-auto">
+      <form name="TweetInfo">
+        <div>
+          <label for="tweet url"> </label>
+          <input
+            id="in"
+            type="text"
+            size="100"
+            pInputText
+            [(ngModel)]="tweetUrl"
+            name="tweetUrl"
+            placeholder="enter tweet url"
+          />
+          <button aria-label="enter tweet url" (click)="getTweetInfo(tweetUrl)">
+            Get Tweet
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="tweetInfo !== null">
+    <br />
+    <div class="row">
+      <div id="" class="col-12 col-lg-7">
+        <div
+          id="tweetpretty"
+          class="col-12"
+          class="imageback"
+          [ngStyle]="{
+            'background-image': selectedPattern
+              ? 'url(' + '../../assets/' + selectedPattern + ')'
+              : 'none',
+            'background-color': selectedBackgroundColor,
+            'min-width': '540px'
+          }"
+        >
+          <div class="row">
+            <div class="col-12 p-10">
+              <div
+                class="tweetpanel panel tweetback panel-default border rounded rounded float-left"
+                [ngStyle]="{
+                  'background-color': selectedBackgroundTweetColor,
+                  color: selectedTextTweetColor
+                }"
+              >
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-2">
+                      <img
+                        class="img-fluid rounded-circle padding-10"
+                        src="{{ tweetInfo.photourl }}"
+                        alt="photo"
+                      />
+                    </div>
+                    <div class="col-10">
+                      <div class="row">
+                        {{ tweetInfo.name }}
+                      </div>
+                      <div class="row tweetusername">
+                        @{{ tweetInfo.username }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div
+                  class="panel-body p-10 tweettext"
+                  [innerHTML]="tweetInfo.text"
+                ></div>
+
+                <div *ngIf="tweetInfo.referencedtweet !== null">
+                  <br />
+                  <div class="row">
+                    <div class="col-12 p-10">
+                      <div
+                        class="tweetpanel panel panel-default border rounded rounded float-left"
+                      >
+                        <div class="panel-heading">
+                          <div class="row">
+                            <div class="col-2">
+                              <img
+                                class="rounded-circle padding-10"
+                                src="{{ tweetInfo.referencedtweet.photourl }}"
+                                alt="photo"
+                              />
+                            </div>
+                            <div class="col-10">
+                              <div class="row">
+                                {{ tweetInfo.referencedtweet.name }}
+                              </div>
+                              <div class="row tweetusername">
+                                @{{ tweetInfo.referencedtweet.username }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div
+                          class="panel-body p-10 tweettextreferenced"
+                          [innerHTML]="tweetInfo.referencedtweet.text"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="tweetInfo.tweetedphotourl !== null">
+                  <img
+                    src="{{ tweetInfo.tweetedphotourl }}"
+                    class="twwetedpicture rounded center-block img-fluid"
+                    alt="tweeted photo"
+                  />
+                </div>
+                <br />
+                {{ tweetInfo.createddate.toString() + " UTC" | date: "medium" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="" class="col-12 col-lg-5">
+        <div class="ml-5">
+          <div class="row">
+            <br />
+            <p-colorPicker
+              [(ngModel)]="selectedTextTweetColor"
+              (onChange)="textTweetColorSelected($event)"
+            ></p-colorPicker>
+            <h6>&nbsp;&nbsp;Tweet Text Color</h6>
+          </div>
+          <br />
+          <div class="row">
+            <p-colorPicker
+              [(ngModel)]="selectedBackgroundTweetColor"
+              (onChange)="backgroundTweetColorSelected($event)"
+            ></p-colorPicker>
+            <h6>&nbsp;&nbsp;Tweet Background Color</h6>
+          </div>
+          <br />
+          <div class="row">
+            <p-colorPicker
+              [(ngModel)]="selectedBackgroundColor"
+              (onChange)="backgroundColorSelected($event)"
+            ></p-colorPicker>
+            <h6>&nbsp;&nbsp;Background Color</h6>
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <br />
+            <div class="background-controls">
+              <p-carousel
+                class="pattern-carousel"
+                [value]="graphicPatterns"
+                [numVisible]="4"
+                [numScroll]="4"
+                [circular]="false"
+                [responsiveOptions]="responsiveOptions"
+              >
+                <ng-template pTemplate="header">
+                  <h6>&nbsp; &nbsp; &nbsp; Background Patterns</h6>
+                </ng-template>
+                <ng-template let-pattern pTemplate="item">
+                  <div class="graphic-pattern-item">
+                    <div class="graphic-pattern-content">
+                      <div class="p-mb-3">
+                        <img
+                          src="../../assets/{{ pattern.name }}"
+                          class="grahic-pattern-image"
+                          (click)="patternSelected(pattern.name)"
+                          [ngStyle]="{
+                            border:
+                              selectedPattern == pattern.name
+                                ? '2px solid #555'
+                                : 'none'
+                          }"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-carousel>
+            </div>
+            <div></div>
+          </div>
+          <div class="row">
+            <button aria-label="save as image" (click)="saveToImage()">
+              Save Image
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
