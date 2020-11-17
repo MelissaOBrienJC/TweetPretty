@@ -8,7 +8,7 @@ Angular Web Application turns tweets into pretty images that can be shared on so
 
 <p align="center">    
     <img src="https://tweetpretty.mobdemo.org//images//screencapture2-tweetpretty-mobdemo-org.png" />   
- </p>s
+ </p>
 
 ## Versions
 
@@ -19,4 +19,5 @@ Primeng			: 9.0.2
 Typescript		: 3.8.3
 
 ```
-"# TweetPretty" 
+
+"# TweetPretty"
