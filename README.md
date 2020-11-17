@@ -19,5 +19,3 @@ Primeng			: 9.0.2
 Typescript		: 3.8.3
 
 ```
-
-"# TweetPretty"
